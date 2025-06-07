@@ -23,4 +23,17 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(FileTypeNotAllowedException.class)
+    public ResponseEntity<ErrorResponse> handleFileTypeNotAllowed(FileTypeNotAllowedException ex,
+                                                                  HttpServletRequest request) {
+        ErrorResponse response = new ErrorResponse(LocalDateTime.now(), ex.getMessage(), request.getRequestURI());
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(FileStorageException.class)
+    public ResponseEntity<ErrorResponse> handleFileStorageError(FileStorageException ex,
+                                                                HttpServletRequest request) {
+        ErrorResponse response = new ErrorResponse(LocalDateTime.now(), ex.getMessage(), request.getRequestURI());
+        return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 }

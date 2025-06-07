@@ -1,10 +1,7 @@
 package com.pawan.dropbox.exception;
 
-public class FileStorageException extends RuntimeException{
-    public FileStorageException(String message){
+public class FileStorageException extends RuntimeException {
+    public FileStorageException(String message) {
         super(message);
-    }
-    public FileStorageException(String message, Throwable cause) {
-        super(message, cause);
     }
 }
