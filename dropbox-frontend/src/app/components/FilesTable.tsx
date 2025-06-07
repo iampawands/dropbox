@@ -12,6 +12,7 @@ import {
   Typography,
 } from "@mui/material";
 import { FileMetadataView } from "../../types/FileMetadata";
+import { formatSize } from "../utils/fileUtils";
 
 interface FilesTableProps {
   files: FileMetadataView[];
@@ -23,14 +24,6 @@ interface FilesTableProps {
   onRowsPerPageChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onViewClick: (fileId: number, contentType: string) => void;
 }
-
-const formatSize = (sizeInBytes: number) => {
-  if (sizeInBytes < 1024) return `${sizeInBytes} B`;
-  const kb = sizeInBytes / 1024;
-  if (kb < 1024) return `${kb.toFixed(1)} KB`;
-  const mb = kb / 1024;
-  return `${mb.toFixed(1)} MB`;
-};
 
 export const FilesTable: React.FC<FilesTableProps> = ({
   files,
