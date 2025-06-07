@@ -1,6 +1,5 @@
 package com.pawan.dropbox.exception;
 
-
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +17,8 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErrorResponse> handleValidationException(MethodArgumentNotValidException ex,
                                                                    HttpServletRequest request){
 
-        String errors = ex.getBindingResult().getFieldErrors().stream().map(error -> error.getField()+": "+error.getDefaultMessage()).collect(Collectors.joining(", "));
+        String errors = ex.getBindingResult().getFieldErrors().stream()
+                .map(error -> error.getField()+": "+error.getDefaultMessage()).collect(Collectors.joining(", "));
         ErrorResponse errorResponse = new ErrorResponse(LocalDateTime.now(), errors, request.getRequestURI());
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
